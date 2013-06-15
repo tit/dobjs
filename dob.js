@@ -144,7 +144,7 @@ if (dob_settings[BrowserDetect.browser.toLowerCase()] > BrowserDetect.version) {
     ba.style.left = '0px';
     ba.style.position = 'absolute';
     ba.style.backgroundColor = 'white';
-    ba.innerHTML = 'Update your browser or click anywhere vor view site as is';
+    ba.innerHTML = 'Update your browser or click anywhere for view site as is';
     ba.setAttribute('onclick', 'document.body.removeChild(ba);')
 
     document.body.appendChild(ba);
