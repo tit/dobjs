@@ -135,17 +135,15 @@ var BrowserDetect = {
 BrowserDetect.init();
 
 if (dob_settings[BrowserDetect.browser.toLowerCase()] > BrowserDetect.version) {
-    var browser_update_div = document.createElement('div');
-
-    browser_update_div.style.width = Math.max(document.body.clientWidth, document.body.offsetWidth, document.body.scrollWidth);
-    browser_update_div.style.height = Math.max(document.body.clientHeight, document.body.offsetHeight, document.body.scrollHeight);
-    browser_update_div.style.zIndex = '2';
-    browser_update_div.style.top = '0px';
-    browser_update_div.style.left = '0px';
-    browser_update_div.style.position = 'absolute';
-    browser_update_div.style.backgroundColor = 'white';
-    browser_update_div.innerHTML = 'Update your browser or click anywhere for view site as is';
-    browser_update_div.setAttribute('onclick', 'document.body.removeChild(ba)');
-
-    document.body.appendChild(browser_update_div);
+    var browser_update_parent_div = document.createElement('div');
+    browser_update_parent_div.style.width = Math.max(document.body.clientWidth, document.body.offsetWidth, document.body.scrollWidth);
+    browser_update_parent_div.style.height = Math.max(document.body.clientHeight, document.body.offsetHeight, document.body.scrollHeight);
+    browser_update_parent_div.style.zIndex = '2';
+    browser_update_parent_div.style.top = '0px';
+    browser_update_parent_div.style.left = '0px';
+    browser_update_parent_div.style.position = 'absolute';
+    browser_update_parent_div.style.backgroundColor = 'white';
+    browser_update_parent_div.innerHTML = 'Update your browser or click anywhere for view site as is';
+    browser_update_parent_div.setAttribute('onclick', 'document.body.removeChild(browser_update_parent_div)');
+    document.body.appendChild(browser_update_parent_div);
 }
