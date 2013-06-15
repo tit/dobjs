@@ -135,17 +135,17 @@ var BrowserDetect = {
 BrowserDetect.init();
 
 if (dob_settings[BrowserDetect.browser.toLowerCase()] > BrowserDetect.version) {
-    var ba = document.createElement('div');
+    var browser_update_div = document.createElement('div');
 
-    ba.style.width = '100%';
-    ba.style.height = '100%';
-    ba.style.zIndex = '2';
-    ba.style.top = '0px';
-    ba.style.left = '0px';
-    ba.style.position = 'absolute';
-    ba.style.backgroundColor = 'white';
-    ba.innerHTML = 'Update your browser or click anywhere for view site as is';
-    ba.setAttribute('onclick', 'document.body.removeChild(ba)');
+    browser_update_div.style.width = Math.max(document.body.clientWidth, document.body.offsetWidth, document.body.scrollWidth);
+    browser_update_div.style.height = Math.max(document.body.clientHeight, document.body.offsetHeight, document.body.scrollHeight);
+    browser_update_div.style.zIndex = '2';
+    browser_update_div.style.top = '0px';
+    browser_update_div.style.left = '0px';
+    browser_update_div.style.position = 'absolute';
+    browser_update_div.style.backgroundColor = 'white';
+    browser_update_div.innerHTML = 'Update your browser or click anywhere for view site as is';
+    browser_update_div.setAttribute('onclick', 'document.body.removeChild(ba)');
 
-    document.body.appendChild(ba);
+    document.body.appendChild(browser_update_div);
 }
