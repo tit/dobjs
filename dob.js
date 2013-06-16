@@ -29,7 +29,7 @@ function dob_getCookie(c_name) {
     return c_value;
 }
 
-function dob_close(dob_settings) {
+function dob_close() {
     dob_setCookie('dob_ignore', 'true', dob_settings.cookie_day_expires);
     document.body.removeChild(browser_update_parent_div);
 }
@@ -181,7 +181,7 @@ if ('true' != dob_getCookie('dob_ignore')) {
         browser_update_parent_div.style.position = 'absolute';
         browser_update_parent_div.style.backgroundColor = 'white';
         browser_update_parent_div.innerHTML = 'Update your browser or click anywhere for view site as is';
-        browser_update_parent_div.setAttribute('onclick', 'dob_close(dob_settings)');
+        browser_update_parent_div.setAttribute('onclick', 'dob_close()');
         document.body.appendChild(browser_update_parent_div);
     }
 }
