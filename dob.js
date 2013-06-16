@@ -1,3 +1,39 @@
+if (typeof dob_settings.cookie_day_expires == 'undefined') {
+    dob_settings.cookie_day_expires = 3;
+}
+
+function dob_setCookie(c_name, value, exdays) {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+    document.cookie = c_name + "=" + c_value;
+}
+
+function dob_getCookie(c_name) {
+    var c_value = document.cookie;
+    var c_start = c_value.indexOf(" " + c_name + "=");
+    if (c_start == -1) {
+        c_start = c_value.indexOf(c_name + "=");
+    }
+    if (c_start == -1) {
+        c_value = null;
+    }
+    else {
+        c_start = c_value.indexOf("=", c_start) + 1;
+        var c_end = c_value.indexOf(";", c_start);
+        if (c_end == -1) {
+            c_end = c_value.length;
+        }
+        c_value = unescape(c_value.substring(c_start, c_end));
+    }
+    return c_value;
+}
+
+function dob_close(dob_settings) {
+    dob_setCookie('dob_ignore', 'true', dob_settings.cookie_day_expires);
+    document.body.removeChild(browser_update_parent_div);
+}
+
 var BrowserDetect = {
     init: function () {
         this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
@@ -134,16 +170,18 @@ var BrowserDetect = {
 };
 BrowserDetect.init();
 
-if (dob_settings[BrowserDetect.browser.toLowerCase()] > BrowserDetect.version) {
-    var browser_update_parent_div = document.createElement('div');
-    browser_update_parent_div.style.width = Math.max(document.body.clientWidth, document.body.offsetWidth, document.body.scrollWidth);
-    browser_update_parent_div.style.height = Math.max(document.body.clientHeight, document.body.offsetHeight, document.body.scrollHeight);
-    browser_update_parent_div.style.zIndex = '2';
-    browser_update_parent_div.style.top = '0px';
-    browser_update_parent_div.style.left = '0px';
-    browser_update_parent_div.style.position = 'absolute';
-    browser_update_parent_div.style.backgroundColor = 'white';
-    browser_update_parent_div.innerHTML = 'Update your browser or click anywhere for view site as is';
-    browser_update_parent_div.setAttribute('onclick', 'document.body.removeChild(browser_update_parent_div)');
-    document.body.appendChild(browser_update_parent_div);
+if ('true' != dob_getCookie('dob_ignore')) {
+    if (dob_settings.browsers[BrowserDetect.browser.toLowerCase()] > BrowserDetect.version) {
+        var browser_update_parent_div = document.createElement('div');
+        browser_update_parent_div.style.width = Math.max(document.body.clientWidth, document.body.offsetWidth, document.body.scrollWidth);
+        browser_update_parent_div.style.height = Math.max(document.body.clientHeight, document.body.offsetHeight, document.body.scrollHeight);
+        browser_update_parent_div.style.zIndex = '2';
+        browser_update_parent_div.style.top = '0px';
+        browser_update_parent_div.style.left = '0px';
+        browser_update_parent_div.style.position = 'absolute';
+        browser_update_parent_div.style.backgroundColor = 'white';
+        browser_update_parent_div.innerHTML = 'Update your browser or click anywhere for view site as is';
+        browser_update_parent_div.setAttribute('onclick', 'dob_close(dob_settings)');
+        document.body.appendChild(browser_update_parent_div);
+    }
 }
