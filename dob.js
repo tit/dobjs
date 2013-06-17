@@ -173,15 +173,41 @@ BrowserDetect.init();
 if ('true' != dob_getCookie('dob_ignore')) {
     if (dob_settings.browsers[BrowserDetect.browser.toLowerCase()] > BrowserDetect.version) {
         var browser_update_parent_div = document.createElement('div');
+        browser_update_parent_div.style.top = '0';
+        browser_update_parent_div.style.left = '0';
         browser_update_parent_div.style.width = Math.max(document.body.clientWidth, document.body.offsetWidth, document.body.scrollWidth);
-        browser_update_parent_div.style.height = Math.max(document.body.clientHeight, document.body.offsetHeight, document.body.scrollHeight);
-        browser_update_parent_div.style.zIndex = '2';
-        browser_update_parent_div.style.top = '0px';
-        browser_update_parent_div.style.left = '0px';
+        browser_update_parent_div.style.height = '50px';
         browser_update_parent_div.style.position = 'absolute';
-        browser_update_parent_div.style.backgroundColor = 'white';
-        browser_update_parent_div.innerHTML = 'Update your browser or click anywhere for view site as is';
-        browser_update_parent_div.setAttribute('onclick', 'dob_close()');
+        browser_update_parent_div.style.opacity = '0.9';
+        browser_update_parent_div.style.backgroundColor = 'red';
         document.body.appendChild(browser_update_parent_div);
+
+        var browser_update_child_table = document.createElement('table');
+        browser_update_child_table.style.verticalAlign = 'baseline';
+        browser_update_child_table.style.textAlign = 'center';
+        browser_update_child_table.style.width = '100%';
+        browser_update_child_table.style.height = '100%';
+        browser_update_child_table.style.opacity = '1';
+        browser_update_child_table.style.color = 'whitesmoke';
+        browser_update_child_table.style.fontWeight = 'bold';
+        browser_update_child_table.style.fontFamily = 'sans-serif';
+        browser_update_parent_div.appendChild(browser_update_child_table);
+
+        var browser_update_child_tr = document.createElement('tr');
+        browser_update_child_table.appendChild(browser_update_child_tr);
+
+        var browser_update_child_td_text = document.createElement('td');
+        browser_update_child_td_text.innerText = 'Для корректного просмотра сайта обновите или смените ваш браузер.';
+        browser_update_child_tr.appendChild(browser_update_child_td_text);
+
+        var browser_update_child_td_close = document.createElement('td');
+        browser_update_child_tr.appendChild(browser_update_child_td_close);
+
+        var browser_update_child_a_close = document.createElement('a');
+        browser_update_child_a_close.style.color = 'whitesmoke';
+        browser_update_child_a_close.innerText = 'Закрыть';
+        browser_update_child_a_close.setAttribute('href', '#');
+        browser_update_child_a_close.setAttribute('onclick', 'dob_close()');
+        browser_update_child_td_close.appendChild(browser_update_child_a_close);
     }
 }
