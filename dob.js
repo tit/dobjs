@@ -1,8 +1,7 @@
 (function () {
-  function declOfNum(number, titles)
-  {
-    cases = [2, 0, 1, 1, 1, 2];
-    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
+  function declOfNum(number, titles) {
+    var cases = [2, 0, 1, 1, 1, 2];
+    return titles[ (number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5] ];
   }
 
   if ('undefined' == typeof dob_settings.cookie_day_expires) dob_settings.cookie_day_expires = 3;
@@ -12,7 +11,7 @@
   dob_settings.i18n = {
     en: {
       notification_text: 'For correctly view the site, update or change your browser',
-      close_text: 'Close for ' + dob_settings.cookie_day_expires + ' days'
+      close_text: 'Close for ' + dob_settings.cookie_day_expires + ' ' + declOfNum(dob_settings.cookie_day_expires, ['day', 'days', 'days'])
     },
     ru: {
       notification_text: 'Для корректного просмотра сайта обновите или смените ваш браузер',
@@ -49,7 +48,7 @@
 
   function banner_close() {
     setCookie('dob_ignore', 'true', dob_settings.cookie_day_expires);
-    document.body.removeChild(browser_update_parent_div);
+    document.body.removeChild(document.getElementById('dob_banner'));
   }
 
   var BrowserDetect = {
@@ -194,6 +193,7 @@
 
       // div
       elements[0] = document.createElement('div');
+      elements[0].setAttribute('id', 'dob_banner');
       elements[0].style.top = '0';
       elements[0].style.left = '0';
       elements[0].style.width = '100%';
@@ -228,7 +228,7 @@
       elements[5].style.color = 'whitesmoke';
       elements[5].innerText = dob_settings.i18n[dob_settings.language].close_text;
       elements[5].setAttribute('href', '#');
-      elements[5].setAttribute('onclick', 'dob_close()');
+      elements[5].onclick = banner_close;
 
       document.body.appendChild(elements[0]);
       elements[0].appendChild(elements[1]);
