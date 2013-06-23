@@ -17,10 +17,8 @@
     return query_string;
   }();
 
-  switch (QueryString.dob_ignore) {
-    case 'false':
-      setCookie('dob_ignore', 'false');
-      break;
+  if (QueryString.dob_ignore == 'false') {
+    setCookie('dob_ignore', 'false');
   }
 
   function declOfNum(number, titles) {
@@ -34,12 +32,12 @@
 
   dob_settings.i18n = {
     en: {
-      notification_text: 'For correctly view the site, update or change your browser',
-      close_text: 'Close for ' + dob_settings.cookie_day_expires + ' ' + declOfNum(dob_settings.cookie_day_expires, ['day', 'days', 'days'])
+      notification_text: 'undefined' == typeof dob_settings.notification_text ? 'For correctly view the site, update or change your browser' : dob_settings.notification_text,
+      close_text: 'undefined' == typeof dob_settings.close_text ? 'Close for ' + dob_settings.cookie_day_expires + ' ' + declOfNum(dob_settings.cookie_day_expires, ['day', 'days', 'days']) : dob_settings.close_text
     },
     ru: {
-      notification_text: 'Для корректного просмотра сайта обновите или смените ваш браузер',
-      close_text: 'Закрыть на ' + dob_settings.cookie_day_expires + ' ' + declOfNum(dob_settings.cookie_day_expires, ['день', 'дня', 'дней'])
+      notification_text: 'undefined' == typeof dob_settings.notification_text ? 'Для корректного просмотра сайта обновите или смените ваш браузер' : dob_settings.notification_text,
+      close_text: 'undefined' == typeof dob_settings.close_text ? 'Закрыть на ' + dob_settings.cookie_day_expires + ' ' + declOfNum(dob_settings.cookie_day_expires, ['день', 'дня', 'дней']) : dob_settings.close_text
     }
   };
 
