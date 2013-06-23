@@ -255,11 +255,22 @@
       elements[5].setAttribute('href', '#');
       elements[5].onclick = banner_close;
 
+      // div into body
       document.body.appendChild(elements[0]);
+
+      // table into div
       elements[0].appendChild(elements[1]);
+
+      // tr into table
       elements[1].appendChild(elements[2]);
+
+      // td into tr
       elements[2].appendChild(elements[3]);
+
+      // td into tr
       elements[2].appendChild(elements[4]);
+
+      // a into td
       elements[4].appendChild(elements[5]);
     }
   }
