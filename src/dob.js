@@ -27,16 +27,17 @@
   }
 
   if ('undefined' == typeof dob_settings.cookie_day_expires) dob_settings.cookie_day_expires = 3;
+  if ('undefined' == typeof dob_settings.height) dob_settings.height = 50;
   if ('undefined' == typeof dob_settings.background_color) dob_settings.background_color = 'red';
   if ('undefined' == typeof dob_settings.language) dob_settings.language = 'en';
 
   dob_settings.i18n = {
     en: {
-      notification_text: 'undefined' == typeof dob_settings.notification_text ? 'For correctly view the site, update or change your browser' : dob_settings.notification_text,
+      notification_text: 'undefined' == typeof dob_settings.notification_text ? 'For correctly view the site, <a href="http://www.whatbrowser.org/intl/en/">update or change</a> your browser' : dob_settings.notification_text,
       close_text: 'undefined' == typeof dob_settings.close_text ? 'Close for ' + dob_settings.cookie_day_expires + ' ' + declOfNum(dob_settings.cookie_day_expires, ['day', 'days', 'days']) : dob_settings.close_text
     },
     ru: {
-      notification_text: 'undefined' == typeof dob_settings.notification_text ? 'Для корректного просмотра сайта обновите или смените ваш браузер' : dob_settings.notification_text,
+      notification_text: 'undefined' == typeof dob_settings.notification_text ? 'Для корректного просмотра сайта <a style="color:white" href="http://www.whatbrowser.org/intl/ru/">обновите или смените</a> ваш браузер' : dob_settings.notification_text,
       close_text: 'undefined' == typeof dob_settings.close_text ? 'Закрыть на ' + dob_settings.cookie_day_expires + ' ' + declOfNum(dob_settings.cookie_day_expires, ['день', 'дня', 'дней']) : dob_settings.close_text
     }
   };
@@ -220,7 +221,7 @@
       elements[0].style.top = '0';
       elements[0].style.left = '0';
       elements[0].style.width = '100%';
-      elements[0].style.height = '50px';
+      elements[0].style.height = dob_settings.height + 'px';
       elements[0].style.position = 'absolute';
       elements[0].style.opacity = '0.9';
       elements[0].style.backgroundColor = dob_settings.background_color;
@@ -241,7 +242,7 @@
 
       // td
       elements[3] = document.createElement('td');
-      elements[3].innerText = dob_settings.i18n[dob_settings.language].notification_text;
+      elements[3].innerHTML = dob_settings.i18n[dob_settings.language].notification_text;
 
       // td
       elements[4] = document.createElement('td');
