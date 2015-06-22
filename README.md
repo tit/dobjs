@@ -10,7 +10,7 @@ DobJS is Detect old browsers plugin
 =========
 Для установки плагина нужно добавить в конец `<body>` *.html* файла две строки:
 
-    <script>dob_settings = { browsers: { ie: 7 }</script>
+    <script>dob_settings = { browsers: { ie: 7 } }</script>
     <script src="dob.js"></script>
 
 Пример использования
